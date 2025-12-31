@@ -1,0 +1,26 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Eshop (Spring Boot)",
+            "request": "launch",
+            "mainClass": "com.yourdomain.eshop.EshopApplication",
+            "projectName": "eshop",
+            "cwd": "${workspaceFolder}",
+            "vmArgs": "-Dspring.profiles.active=dev",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Attach to Remote JVM (5005)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+        }
+    ],
+ 
+}

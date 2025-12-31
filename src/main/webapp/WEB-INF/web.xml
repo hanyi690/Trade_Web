@@ -1,0 +1,8 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="3.1">
+	<!-- 确保容器把 index.jsp 作为欢迎页 -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 可空，Spring Boot 不依赖 web.xml；此处仅为兼容传统结构 -->
+</web-app>

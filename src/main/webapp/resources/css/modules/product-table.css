@@ -1,0 +1,222 @@
+/* 商品表格组件专用样式 */
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+}
+
+.product-table th {
+    background: #f8f9fa;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+}
+
+.product-table th.sortable {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product-table th.sortable:hover {
+    background-color: #e9ecef;
+}
+
+.product-table th.sortable::after {
+    content: "↕";
+    margin-left: 5px;
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+.product-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.product-table tr {
+    transition: all 0.2s ease;
+}
+
+.product-table tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.001);
+}
+
+/* 商品图片容器 */
+.product-image-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    position: relative;
+}
+
+.product-image-container.lazyloaded {
+    background: transparent;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* 商品描述 */
+.product-description-small {
+    color: #6c757d;
+    font-size: 0.85em;
+    line-height: 1.4;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 价格样式 */
+.price {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+/* 库存指示器 */
+.stock-indicator {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.stock-high {
+    color: #27ae60;
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.stock-medium {
+    color: #f39c12;
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+.stock-low {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.stock-unknown {
+    color: #95a5a6;
+    background-color: rgba(149, 165, 166, 0.1);
+}
+
+/* 销量计数 */
+.sales-count {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* 徽章样式 */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+}
+
+.badge-success {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.badge-warning {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+/* 操作按钮组 */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.action-buttons .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    min-width: 40px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-inline {
+    display: inline;
+}
+
+/* 空状态样式 */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-state-title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.empty-state-message {
+    color: #6c757d;
+    margin-bottom: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}

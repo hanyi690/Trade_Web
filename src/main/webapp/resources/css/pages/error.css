@@ -1,0 +1,22 @@
+/* 错误页面专用样式 */
+
+.error-info {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.error-item {
+    margin: 8px 0;
+    padding: 5px 10px;
+    background-color: #fff;
+    border-left: 4px solid var(--danger-color);
+}
+
+.error-label {
+    font-weight: bold;
+    color: var(--danger-color);
+    margin-right: 10px;
+}

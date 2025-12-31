@@ -1,0 +1,559 @@
+/* 订单相关页面的样式 */
+
+/* 支付页面样式 */
+.payment-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.payment-method {
+    flex: 1;
+    min-width: 150px;
+    padding: 20px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.payment-method:hover {
+    border-color: #007bff;
+    background: #f8f9fa;
+}
+
+.payment-method.selected {
+    border-color: #28a745;
+    background: #e8f5e9;
+}
+
+.payment-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.payment-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+/* 订单表单页面样式 */
+.order-detail-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.order-item {
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 0;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.total-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.detail-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.info-row {
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    min-width: 120px;
+    display: inline-block;
+}
+
+.status-badge {
+    font-size: 0.9rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-paid {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-shipped {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.user-info {
+    background-color: #e9f7fe;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.readonly-field {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    padding: 8px;
+    border-radius: 4px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+/* ===== 日期筛选器样式 ===== */
+.date-filter {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.filter-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: #2c3e50;
+    white-space: nowrap;
+}
+
+.filter-input {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 订单相关统计信息样式 */
+.order-count {
+    font-size: 0.8em;
+    color: #3498db;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.stat-date-range {
+    font-size: 0.8em;
+    color: #6c757d;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+/* 订单操作按钮容器 */
+.order-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* 订单列表容器 */
+.order-list-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* 订单卡片样式 */
+.order-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #dee2e6;
+    flex-wrap: wrap;
+}
+
+.order-id {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+.order-buyer {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-left: 15px;
+}
+
+.order-time {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.order-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-paid {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.order-details {
+    margin: 15px 0;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 100px;
+}
+
+.order-amount {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.order-items {
+    margin-top: 15px;
+}
+
+.order-items-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+    gap: 15px;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+.product-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.item-shop {
+    color: #6c757d;
+    font-size: 0.85em;
+}
+
+.item-quantity {
+    color: #666;
+    min-width: 50px;
+    text-align: center;
+}
+
+.item-price {
+    color: #e74c3c;
+    font-weight: 600;
+    min-width: 100px;
+    text-align: right;
+}
+
+.order-total {
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--primary-color);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #dee2e6;
+}
+
+.order-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.order-action-buttons .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    min-width: 40px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 空状态样式 */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-state-title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.empty-state-message {
+    color: #6c757d;
+    margin-bottom: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.empty-state-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 订单项状态样式 */
+.order-item-status {
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.order-item-status:hover {
+    background: #f1f3f4;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 订单项状态徽章 */
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+}
+
+.badge.bg-info {
+    background-color: #0dcaf0 !important;
+    color: white;
+}
+
+.badge.bg-success {
+    background-color: #198754 !important;
+    color: white;
+}
+
+/* 订单状态徽章 */
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* 支付状态 */
+.payment-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.payment-status.paid {
+    color: #28a745;
+}
+
+.payment-status.unpaid {
+    color: #dc3545;
+}
+
+/* 批量操作按钮 */
+.batch-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.batch-select-all {
+    margin-right: 10px;
+}
+
+/* 订单项复选框 */
+.order-item-checkbox {
+    margin-right: 10px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .order-item-status .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .order-item-status .col-md-3 {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    .batch-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

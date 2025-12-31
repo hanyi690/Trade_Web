@@ -1,0 +1,340 @@
+/* 个人中心页面样式 */
+
+.profile-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.user-info {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background: #f1f3ff;
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.1);
+}
+
+.info-label {
+    min-width: 100px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.info-value {
+    flex: 1;
+    color: #555;
+    font-size: 1.05rem;
+}
+
+.info-value a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.info-value a:hover {
+    text-decoration: underline;
+    color: #764ba2;
+}
+
+.profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.profile-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.profile-actions .btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.profile-actions .btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.2);
+}
+
+.profile-actions .btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.profile-actions .btn-primary:hover {
+    background: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.profile-actions .btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.profile-actions .btn-warning:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.profile-actions .btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.profile-actions .btn-info:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+.profile-actions .btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.profile-actions .btn-danger:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.profile-actions .btn-danger:active {
+    background: #a93226;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 15px;
+        padding: 20px;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .info-label {
+        min-width: auto;
+        font-size: 0.9rem;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+    }
+    
+    .profile-actions {
+        flex-direction: column;
+    }
+    
+    .profile-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 状态指示器 */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-indicator.active {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status-indicator.inactive {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+}
+
+/* 链接样式增强 */
+.info-value a {
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.info-value a:hover {
+    background: rgba(102, 126, 234, 0.2);
+    text-decoration: none;
+}
+
+/* 编辑个人信息模态框样式 */
+.edit-profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.edit-profile-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.edit-profile-modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.edit-profile-modal.active .edit-profile-modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-header h3 i {
+    color: #667eea;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #e74c3c;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-body .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.modal-body .form-group label .required {
+    color: #e74c3c;
+}
+
+.modal-body .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.modal-body .form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.modal-body .form-control:read-only {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.modal-body .form-text {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+.modal-body .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.modal-body .form-actions .btn {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
