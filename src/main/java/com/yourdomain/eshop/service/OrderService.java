@@ -89,4 +89,10 @@ public interface OrderService {
      */
     Order updateOrderInfo(Long orderId, Long userId, String shippingAddress, 
                          String receiverName, String receiverPhone, String paymentMethod);
+
+    /**
+     * 强制取消订单（管理员操作，不检查订单状态）
+     * @param orderId 订单ID
+     */
+    void forceCancelOrder(Long orderId);
 }

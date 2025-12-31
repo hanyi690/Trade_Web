@@ -329,6 +329,7 @@ public class ShopController {
         
         if (!productIds.isEmpty() ) {
             loadOrderData(productIds, startDate, endDate, model);
+    
         }
         
         return "shops/shopManage";

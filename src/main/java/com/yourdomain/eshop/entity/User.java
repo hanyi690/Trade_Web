@@ -45,7 +45,7 @@ public class User implements UserDetails {
 	private Role role = Role.CONSUMER;
 
 	// 新增：商店引用（双向关联）
-	@OneToOne(mappedBy = "merchant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "merchant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Shop shop;
 
 	public User() {}

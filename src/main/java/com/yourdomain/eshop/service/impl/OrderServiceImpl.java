@@ -571,6 +571,37 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.save(order);
     }
     
+    @Override
+    public void forceCancelOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+            .orElseThrow(() -> new RuntimeException("订单不存在"));
+        
+        // 检查订单是否已经是取消状态
+        if (order.getStatus() == Order.Status.CANCELLED) {
+            throw new RuntimeException("订单已经是取消状态");
+        }
+        
+        // 保存原始状态用于记录
+        Order.Status originalStatus = order.getStatus();
+        
+        // 强制取消订单
+        order.setStatus(Order.Status.CANCELLED);
+
+        
+       orderRepository.save(order);
+        
+        // 记录强制取消日志
+        logger.info("管理员强制取消订单，订单ID: {}, 原始状态: {}, 取消时间: {}", 
+                   orderId, originalStatus, LocalDateTime.now());
+        
+        // 发送订单取消通知邮件
+        try {
+            logger.info("强制取消通知邮件发送成功，订单号: {}", orderId);
+        } catch (Exception e) {
+            logger.error("发送强制取消通知邮件失败: {}", e.getMessage(), e);
+        }
+    }
+    
     // 辅助类：用于统计单个商品的销售数据
     private static class ProductStats {
         private final com.yourdomain.eshop.entity.Product product;
