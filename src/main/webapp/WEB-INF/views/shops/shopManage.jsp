@@ -400,9 +400,12 @@
     <input type="hidden" id="ctxPath" value="${pageContext.request.contextPath}">
     <input type="hidden" id="csrfToken" value="${_csrf.token}">
     
-    <!-- 预加载图表数据 -->
-    <meta name="daily-sales-data" content="${dailySalesDataJson}">
-    <meta name="status-distribution-data" content="${statusDistributionJson}">
+
+    <script>
+    // 使用 escapeXml="false" 确保 JSON 引号不被转义成 &quot;
+    window.g_dailySalesData = <c:out value="${dailySalesDataJson}" escapeXml="false" default="[]" />;
+    window.g_statusData = <c:out value="${statusDistributionJson}" escapeXml="false" default="{}" />;
+</script>
 
     <!-- 引入公共脚本 -->
     <script src="${pageContext.request.contextPath}/resources/js/site.js" defer></script>

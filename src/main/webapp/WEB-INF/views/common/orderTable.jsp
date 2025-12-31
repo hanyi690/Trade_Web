@@ -48,7 +48,7 @@
                         <div>
                             <h5 class="card-title mb-1">订单号: ${order.id}</h5>
                             <small class="text-muted">下单时间: ${order.createTime}</small>
-                            <c:if test="${context == 'shop'}">
+                            <c:if test="${context == 'shop' or context == 'admin'}">
                                 <div class="mt-1">
                                     <small class="text-muted">买家: ${order.user.username}</small>
                                 </div>
@@ -99,7 +99,7 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <strong>${item.product.name}</strong>
-                                            <c:if test="${context == 'user'}">
+                                            <c:if test="${context == 'user' or context == 'admin'}">
                                                 <small class="text-muted d-block">店铺: ${item.product.merchant.shop.name}</small>
                                             </c:if>
                                         </div>
@@ -164,6 +164,14 @@
                                         <span class="badge bg-success">已完成</span>
                                     </c:if>
                                 </c:when>
+                                <c:when test="${context == 'admin'}">
+                                    <!-- 管理员订单操作 - 仅保留取消权限 -->
+                                    <c:if test="${order.status != 'CANCELLED'}">
+                                        <button class="btn btn-sm btn-danger" onclick="adminCancelOrder('${order.id}')">
+                                            <i class="fas fa-times"></i> 强制取消
+                                        </button>
+                                    </c:if>
+                                </c:when>
                             </c:choose>
                         </div>
                     </div>
@@ -186,6 +194,7 @@
                     <c:choose>
                         <c:when test="${context == 'user'}">暂无订单</c:when>
                         <c:when test="${context == 'shop'}">暂无订单</c:when>
+                        <c:when test="${context == 'admin'}">暂无订单</c:when>
                         <c:otherwise>暂无数据</c:otherwise>
                     </c:choose>
                 </c:otherwise>
@@ -200,6 +209,7 @@
                     <c:choose>
                         <c:when test="${context == 'user'}">您还没有任何订单记录，快去选购商品吧！</c:when>
                         <c:when test="${context == 'shop'}">您的店铺还没有收到任何订单</c:when>
+                        <c:when test="${context == 'admin'}">系统中暂无订单记录</c:when>
                         <c:otherwise>没有相关数据</c:otherwise>
                     </c:choose>
                 </c:otherwise>
@@ -226,48 +236,53 @@ function viewOrderDetail(orderId) {
     window.location.href = '${pageContext.request.contextPath}/orders/' + orderId;
 }
 
-// 取消订单
+// 取消订单（用户/商家）
 function cancelOrder(orderId) {
     if (confirm('确定要取消此订单吗？取消后无法恢复。')) {
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = '${pageContext.request.contextPath}/orders/' + orderId + '/cancel';
-        
-        // 添加CSRF令牌
-        const csrfToken = document.querySelector('meta[name="_csrf"]')?.content || 
-                          document.querySelector('input[name="_csrf"]')?.value;
-        if (csrfToken) {
-            const csrfInput = document.createElement('input');
-            csrfInput.type = 'hidden';
-            csrfInput.name = '_csrf';
-            csrfInput.value = csrfToken;
-            form.appendChild(csrfInput);
-        }
-        
-        document.body.appendChild(form);
-        form.submit();
+        submitFormWithCsrf(form);
     }
 }
 
-// 商家标记为已支付
+// 标记为已支付（商家）
 function markAsPaid(orderId) {
     if (confirm('确定标记为已支付吗？')) {
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = '${pageContext.request.contextPath}/orders/' + orderId + '/mark-paid';
-        
-        const csrfToken = document.querySelector('meta[name="_csrf"]')?.content || 
-                          document.querySelector('input[name="_csrf"]')?.value;
-        if (csrfToken) {
-            const csrfInput = document.createElement('input');
-            csrfInput.type = 'hidden';
-            csrfInput.name = '_csrf';
-            csrfInput.value = csrfToken;
-            form.appendChild(csrfInput);
-        }
-        
-        document.body.appendChild(form);
-        form.submit();
+        submitFormWithCsrf(form);
     }
+}
+
+// 管理员操作 - 统一处理
+function adminAction(orderId, action, message) {
+    if (confirm(message)) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '${pageContext.request.contextPath}/admin/orders/' + orderId + '/' + action;
+        submitFormWithCsrf(form);
+    }
+}
+
+// 管理员强制取消订单（仅保留此功能）
+function adminCancelOrder(orderId) {
+    adminAction(orderId, 'force-cancel', '确定以管理员身份强制取消此订单吗？此操作可能无法撤销。');
+}
+
+// 通用表单提交辅助函数
+function submitFormWithCsrf(form) {
+    const csrfToken = document.querySelector('meta[name="_csrf"]')?.content || 
+                      document.querySelector('input[name="_csrf"]')?.value;
+    if (csrfToken) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_csrf';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+    }
+    document.body.appendChild(form);
+    form.submit();
 }
 </script>

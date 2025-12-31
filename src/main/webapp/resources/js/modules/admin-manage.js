@@ -162,7 +162,6 @@ function initAdminCharts() {
     // 平台销售趋势图
     const platformSalesChart = document.getElementById('platformSalesChart');
     if (platformSalesChart && platformSalesChart.dataset.loaded !== 'true') {
-        // 这里应该从后端获取数据并渲染图表
         loadChart(platformSalesChart);
         platformSalesChart.dataset.loaded = 'true';
     }
@@ -180,14 +179,181 @@ function initAdminCharts() {
         loadChart(salesTrendChart);
         salesTrendChart.dataset.loaded = 'true';
     }
+    
+    // 订单状态分布图
+    const orderStatusChart = document.getElementById('orderStatusChart');
+    if (orderStatusChart && orderStatusChart.dataset.loaded !== 'true') {
+        loadChart(orderStatusChart);
+        orderStatusChart.dataset.loaded = 'true';
+    }
 }
 
-// 加载图表通用函数
+// 实现真正的图表加载函数
 function loadChart(canvasElement) {
-    // 这里应该是具体的图表渲染逻辑
-    // 暂时只标记为已加载
-    canvasElement.dataset.loaded = 'true';
+    if (!canvasElement) return;
+
+    const chartId = canvasElement.id;
+    
+    try {
+        if (chartId === 'salesTrendChart' || chartId === 'platformSalesChart') {
+            renderSalesChart(canvasElement);
+        } else if (chartId === 'shopDistributionChart') {
+            renderShopDistributionChart(canvasElement);
+        } else if (chartId === 'orderStatusChart') {
+            renderOrderStatusChart(canvasElement);
+        }
+        // 标记为已加载，防止重复渲染
+        canvasElement.dataset.loaded = 'true';
+    } catch (e) {
+        console.error("图表渲染失败:", e, chartId);
+    }
+}
+
+// 渲染销售趋势图 - 增强健壮性
+function renderSalesChart(canvas) {
+    // 兼容处理：检查全局变量是否存在
+    const chartData = window.g_dailySalesData || [];
+    if (!chartData || chartData.length === 0) {
+        console.warn("销售数据为空，无法渲染图表");
+        renderEmptyChart(canvas, '暂无销售数据');
+        return;
+    }
+
+    try {
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: chartData.map(item => item.date || item.day),
+                datasets: [{
+                    label: '销售额 (¥)',
+                    data: chartData.map(item => item.sales || item.amount || 0),
+                    borderColor: '#4e73df',
+                    backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // 改为true，保持比例
+                aspectRatio: 2, // 设置宽高比为2:1
+                plugins: {
+                    legend: { display: true, position: 'top' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '¥' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('渲染销售图表失败:', error);
+        renderEmptyChart(canvas, '图表渲染失败');
+    }
+}
+
+// 渲染店铺分布图 - 使用后端数据
+function renderShopDistributionChart(canvas) {
+    // 如果有店铺分布数据，优先使用，否则使用默认数据
+    const distributionData = window.g_statusData || {
+        '活跃店铺': 85,
+        '待审核': 12,
+        '已关闭': 3
+    };
+
+    try {
+        new Chart(canvas, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(distributionData),
+                datasets: [{
+                    data: Object.values(distributionData),
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // 改为true，保持比例
+                aspectRatio: 1, // 饼图强制正方形，防止变成椭圆
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('渲染店铺分布图表失败:', error);
+        renderEmptyChart(canvas, '店铺数据加载失败');
+    }
+}
+
+// 渲染订单状态分布图
+function renderOrderStatusChart(canvas) {
+    const statusData = window.g_statusData || {};
+    
+    if (Object.keys(statusData).length === 0) {
+        renderEmptyChart(canvas, '暂无订单状态数据');
+        return;
+    }
+
+    try {
+        new Chart(canvas, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(statusData),
+                datasets: [{
+                    data: Object.values(statusData),
+                    backgroundColor: ['#4e73df', '#1cc88a', '#f6c23e', '#e74a3b', '#6c757d']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // 改为true，保持比例
+                aspectRatio: 1, // 饼图强制正方形，防止变成椭圆
+                plugins: {
+                    legend: { position: 'right' }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('渲染订单状态图表失败:', error);
+        renderEmptyChart(canvas, '订单数据加载失败');
+    }
+}
+
+// 渲染空图表占位
+function renderEmptyChart(canvas, message) {
+    const ctx = canvas.getContext('2d');
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#666';
+    ctx.textAlign = 'center';
+    ctx.fillText(message, canvas.width / 2, canvas.height / 2);
 }
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', initAdminManagePage);
+document.addEventListener('DOMContentLoaded', function() {
+    // 确保Chart.js已加载
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js未加载，请检查库引入');
+        return;
+    }
+    
+    initAdminManagePage();
+    
+    // 监听标签页内容加载事件
+    window.addEventListener('adminTabContentLoaded', function(event) {
+        const tabId = event.detail.tabId;
+        if (tabId === 'statistics') {
+            // 稍等片刻确保DOM已更新
+            setTimeout(() => {
+                initAdminCharts();
+            }, 100);
+        }
+    });
+});

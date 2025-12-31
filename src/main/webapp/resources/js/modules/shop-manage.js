@@ -152,6 +152,78 @@ window.resetOrdersDateFilter = function() {
         window.resetDateFilter();
     }
 };
+// 实现真正的图表加载函数
+function loadChart(canvasElement) {
+    if (!canvasElement) return;
 
+    // 获取从后端传来的数据字符串 (假设你已经在 JSP 中定义了全局变量)
+    // 或者直接从全局 window 对象读取
+    const chartId = canvasElement.id;
+    
+    try {
+        if (chartId === 'salesChart') {
+            renderSalesChart(canvasElement);
+        } else if (chartId === 'statusChart') {
+            renderStatusChart(canvasElement);
+        }
+        // 标记为已加载，防止重复渲染
+        canvasElement.dataset.loaded = 'true';
+    } catch (e) {
+        console.error("图表渲染失败:", e);
+    }
+}
+
+// 渲染销售趋势图
+function renderSalesChart(canvas) {
+    // 从 JSP 注入的全局变量获取数据（需在 JSP 中先定义）
+    if (typeof g_dailySalesData === 'undefined' || g_dailySalesData.length === 0) return;
+
+    new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: g_dailySalesData.map(item => item.date),
+            datasets: [{
+                label: '销售额 (¥)',
+                data: g_dailySalesData.map(item => item.sales),
+                borderColor: '#4e73df',
+                backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+                responsive: true,
+                maintainAspectRatio: true, // 改为 true，强制保持比例
+                aspectRatio: 2, // 设置宽高比为 2:1（宽度是高度的两倍）
+                plugins: {
+                    legend: { display: true, position: 'top' }
+                }
+            }
+    });
+}
+
+// 渲染订单状态分布图
+function renderStatusChart(canvas) {
+    if (typeof g_statusData === 'undefined' || Object.keys(g_statusData).length === 0) return;
+
+    new Chart(canvas, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(g_statusData),
+            datasets: [{
+                data: Object.values(g_statusData),
+                backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1, // 饼图强制正方形，防止变成椭圆
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+}
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', initShopManagePage);

@@ -158,11 +158,22 @@
 }
 
 .chart-container {
-    background: white;
+    position: relative;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    
+    /* 限制最大宽度，防止在大屏幕上拉得太长 */
+    max-width: 900px; 
+    height: 350px; /* 固定高度 */
+}
+
+/* 饼图/环形图通常不需要太宽，可以更小一点 */
+.chart-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .chart-title {

@@ -1,0 +1,148 @@
+/* 店铺表格组件专用样式 - 参考product-table.css设计 */
+
+.shop-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+}
+
+.shop-table th {
+    background: #f8f9fa;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+}
+
+.shop-table th.sortable {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.shop-table th.sortable:hover {
+    background-color: #e9ecef;
+}
+
+.shop-table th.sortable::after {
+    content: "↕";
+    margin-left: 5px;
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+
+.shop-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+}
+
+.shop-table tr {
+    transition: all 0.2s ease;
+}
+
+.shop-table tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.001);
+}
+
+/* 店铺信息容器 */
+.shop-info {
+    max-width: 250px;
+}
+
+.shop-description {
+    color: #6c757d;
+    font-size: 0.85em;
+    line-height: 1.4;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 店主信息 */
+.merchant-name {
+    font-weight: 500;
+    color: #3498db;
+}
+
+/* 联系方式样式 */
+.shop-table td:nth-child(4) div {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #495057;
+}
+
+/* 地址样式 */
+.shop-address {
+    display: inline-block;
+    max-width: 200px;
+    font-size: 0.9em;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+/* 操作按钮组 */
+.shop-table .action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.shop-table .action-buttons .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    min-width: 40px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 空状态样式 */
+.shop-empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.shop-empty-state-icon {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.shop-empty-state-title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.shop-empty-state-message {
+    color: #6c757d;
+    margin-bottom: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .shop-table th,
+    .shop-table td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    
+    .shop-table .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

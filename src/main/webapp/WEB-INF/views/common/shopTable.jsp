@@ -14,9 +14,7 @@
                     <th>店铺名称</th>
                     <th>店主</th>
                     <th>联系方式</th>
-                    <th>商品数量</th>
-                    <th>销售额</th>
-                    <th>状态</th>
+                    <th>地址</th>
                     <th>创建时间</th>
                     <th>操作</th>
                 </tr>
@@ -49,28 +47,11 @@
                             </c:if>
                         </td>
                         <td>
-                            <span class="product-count">${shop.productCount}</span>
-                        </td>
-                        <td>
-                            <span class="sales-amount">
-                                ¥<fmt:formatNumber value="${shop.totalSales}" minFractionDigits="2"/>
-                            </span>
-                        </td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${shop.status == 'OPEN'}">
-                                    <span class="badge badge-success">营业中</span>
-                                </c:when>
-                                <c:when test="${shop.status == 'CLOSED'}">
-                                    <span class="badge badge-danger">已关闭</span>
-                                </c:when>
-                                <c:when test="${shop.status == 'SUSPENDED'}">
-                                    <span class="badge badge-warning">已暂停</span>
-                                </c:when>
-                                <c:otherwise>
-                                    <span class="badge badge-secondary">${shop.status}</span>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:if test="${not empty shop.address}">
+                                <span class="shop-address">
+                                    ${fn:substring(shop.address, 0, 30)}<c:if test="${fn:length(shop.address) > 30}">...</c:if>
+                                </span>
+                            </c:if>
                         </td>
                         <td>
                             <fmt:parseDate value="${shop.createdTime}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDate"/>
@@ -82,33 +63,11 @@
                                    class="btn btn-secondary btn-sm" title="查看店铺">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="${pageContext.request.contextPath}/admin/shops/edit/${shop.id}" 
+                                <a href="${pageContext.request.contextPath}/shops/edit/${shop.id}" 
                                    class="btn btn-warning btn-sm" title="编辑店铺">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <c:if test="${shop.status == 'OPEN'}">
-                                    <form action="${pageContext.request.contextPath}/admin/shops/suspend/${shop.id}" 
-                                          method="post" class="form-inline d-inline">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit" class="btn btn-danger btn-sm" 
-                                               onclick="return confirm('确定要暂停店铺【${shop.name}】吗？')"
-                                                title="暂停店铺">
-                                            <i class="fas fa-pause"></i>
-                                        </button>
-                                    </form>
-                                </c:if>
-                                <c:if test="${shop.status == 'SUSPENDED'}">
-                                    <form action="${pageContext.request.contextPath}/admin/shops/activate/${shop.id}" 
-                                          method="post" class="form-inline d-inline">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <button type="submit" class="btn btn-success btn-sm" 
-                                               onclick="return confirm('确定要激活店铺【${shop.name}】吗？')"
-                                                title="激活店铺">
-                                            <i class="fas fa-play"></i>
-                                        </button>
-                                    </form>
-                                </c:if>
-                                <form action="${pageContext.request.contextPath}/admin/shops/delete/${shop.id}" 
+                                <form action="${pageContext.request.contextPath}/shops/delete/${shop.id}" 
                                       method="post" class="form-inline d-inline">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-danger btn-sm" 

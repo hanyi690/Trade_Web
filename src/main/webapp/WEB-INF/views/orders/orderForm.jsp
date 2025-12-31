@@ -19,6 +19,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/site.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modules/orders.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modules/order-form.css">
 </head>
 <body>
     <jsp:include page="../common/header.jsp" />

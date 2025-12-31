@@ -163,6 +163,8 @@
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative; /* 为图表定位提供参考 */
+    min-height: 350px; /* 确保有足够的高度显示图表 */
 }
 
 .admin-page .charts-row {
@@ -176,6 +178,16 @@
     margin-bottom: 15px;
     font-size: 1.2rem;
     color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 确保canvas元素在容器内正确显示 */
+.admin-page .chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 300px; /* 限制最大高度，防止过大 */
 }
 
 /* 最近活动列表 */
